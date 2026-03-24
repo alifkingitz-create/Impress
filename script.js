@@ -51,3 +51,15 @@ function openLetter(n){
 function closePopup(){
   document.getElementById("popup").style.display="none";
 }
+function createFlower(){
+  const flower=document.createElement("span");
+  flower.innerHTML="🌸";
+  flower.style.left=Math.random()*100+"vw";
+  flower.style.animationDuration=(Math.random()*3+2)+"s";
+
+  document.querySelector(".flowers")?.appendChild(flower);
+
+  setTimeout(()=>flower.remove(),5000);
+}
+
+setInterval(createFlower,300);
