@@ -83,3 +83,21 @@ button{
   bottom:20px;
   right:20px;
 }
+.back-btn{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  font-size:20px;
+}
+.flowers span{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(100vh);
+  }
+}
