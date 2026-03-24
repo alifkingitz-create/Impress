@@ -1,27 +1,21 @@
 const music = document.getElementById("bg-music");
 const btn = document.getElementById("music-btn");
 
-/* Load music state */
-let isPlaying = localStorage.getItem("music") === "true";
-let time = localStorage.getItem("time");
-
-if(time) music.currentTime = time;
-if(isPlaying) music.play();
-
-/* Button */
-btn.onclick = () => {
-  if(isPlaying){
-    music.pause();
-  } else {
+/* FIRST CLICK e music play (mobile fix) */
+document.body.addEventListener("click", () => {
+  if (!localStorage.getItem("musicStarted")) {
     music.play();
+    localStorage.setItem("musicStarted", "true");
   }
-  isPlaying = !isPlaying;
-  localStorage.setItem("music", isPlaying);
-};
+}, { once: true });
 
-/* Save time */
-window.onbeforeunload = () => {
-  localStorage.setItem("time", music.currentTime);
+/* Music toggle */
+btn.onclick = () => {
+  if (music.paused) {
+    music.play();
+  } else {
+    music.pause();
+  }
 };
 
 /* Navigation */
@@ -31,6 +25,10 @@ function nextPage(){
 
 function go(page){
   window.location.href=page;
+}
+
+function back(){
+  window.history.back();
 }
 
 /* Letters */
@@ -49,6 +47,7 @@ function openLetter(n){
   document.getElementById("line").innerText=text[n-1];
 }
 
+/* CLOSE popup (IMPORTANT FIX) */
 function closePopup(){
   document.getElementById("popup").style.display="none";
 }
